@@ -1,9 +1,9 @@
 pipeline {
-
-    stage('build') {
-        steps {
-            sh 'python --version'
+    stages {
+        stage('build') {
+            steps {
+                sh 'python --version'
+            }
         }
     }
-    
 }
