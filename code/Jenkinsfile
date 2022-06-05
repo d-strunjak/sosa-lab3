@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Clear') {
             steps {
-                bat 'rm -r test'
+                bat 'rmdir /s /q test'
             }
         }
         
