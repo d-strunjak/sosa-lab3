@@ -10,7 +10,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'python test\\code\\unit_test_A.py'
+                script {
+                    try {
+                        bat 'python test\\code\\unit_test_A.py'
+                    } catch (Exception e) {
+                        echo 'Exception occurred: ' + e.toString()
+                    }
+                }
                 bat 'bandit -r test\\code\\dodatak_A.py'
             }
         }
