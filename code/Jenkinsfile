@@ -23,8 +23,7 @@ pipeline {
                     } catch (Exception e) {
                         echo 'Exception occurred: ' + e.toString()
                         bat 'bandit -r test\\code\\dodatak_A.py- f json -o "logs\\bandit_test_%TIMESTAMP%.json"'
-                    }
-                }
+                    } 
                 }
             }
         }
