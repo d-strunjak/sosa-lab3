@@ -26,9 +26,11 @@ pipeline {
                 }
             }
         }
-        stage('Clear') {
-
-        }
+        // stage('Clear') {
+        //     steps {
+        //         bat 'rmdir /s /q test'
+        //     }
+        // }
         
     }
 }
