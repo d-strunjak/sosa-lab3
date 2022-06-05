@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment { 
+        SUCCESS = '1'
+    }
     stages {
         stage('Test') {
             steps {
@@ -9,7 +12,7 @@ pipeline {
                     } catch (Exception e) {
                         echo 'TEST FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
-                        throw e
+                        SUCCESS = '0'
                     }
                 }
             }
@@ -22,21 +25,24 @@ pipeline {
                     } catch (Exception e) {
                         echo 'SECURITY TEST FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
-                        throw e
+                        SUCCESS = '0'
                     }
                 }
             }
         }
         stage('Deliver') {
             steps {
-                bat 'xcopy /s /e /v /Q /Y test\\ production\\'
+                if(SUCCESS == '1') {
+                    bat 'xcopy /s /e /v /Q /Y test\\ production\\'
+                }
+            }
+            post {
+                always {
+                    bat 'rmdir /s /q test'
+                }
             }
         }
-        stage('Clear') {
-            steps {
-                bat 'rmdir /s /q test'
-            }
-        }
+
         
     }
 }
