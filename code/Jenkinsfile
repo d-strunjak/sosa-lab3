@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('stage 1') {
-            steps {
-                echo 'Hello world!'
-                bat 'python --version'
-            }
-        }
         stage('Test') {
             steps {
                 script {
@@ -18,8 +12,7 @@ pipeline {
 
                         bat 'xcopy \\test \\production'
                     } catch (Exception e) {
-                        echo 'BULD FAILED!'
-                        echo 'Check logs for more info'
+                        echo 'BUILD FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
                         
                     }
@@ -28,11 +21,11 @@ pipeline {
                 }
             }
         }
-        // stage('Clear') {
-        //     steps {
-        //         bat 'rmdir /s /q test'
-        //     }
-        // }
+        stage('Clear') {
+            steps {
+                bat 'rm -r test'
+            }
+        }
         
     }
 }
