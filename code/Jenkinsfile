@@ -16,13 +16,13 @@ pipeline {
                         bat 'python test\\code\\unit_test_A.py'
                     } catch (Exception e) {
                         echo 'Exception occurred: ' + e.toString()
-                        bat 'python test\\code\\unit_test_A.py > logs\\unit_test_%TIMESTSAMP%.txt'
+                        bat 'python test\\code\\unit_test_A.py 2> logs\\unit_test_%TIMESTAMP%.txt'
                     }
                     try {
                         bat 'bandit -r test\\code\\dodatak_A.py'
                     } catch (Exception e) {
                         echo 'Exception occurred: ' + e.toString()
-                        bat 'bandit -r test\\code\\dodatak_A.py- f json -o "logs\\bandit_test_%TIMESTAMP%.json"'
+                        bat 'bandit -r test\\code\\dodatak_A.py -f json -o "logs\\bandit_test_%TIMESTAMP%.json"'
                     } 
                 }
             }
