@@ -32,8 +32,10 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                if(SUCCESS == '1') {
-                    bat 'xcopy /s /e /v /Q /Y test\\ production\\'
+                script{
+                    if(SUCCESS == '1') {
+                        bat 'xcopy /s /e /v /Q /Y test\\ production\\'
+                    }
                 }
             }
             post {
