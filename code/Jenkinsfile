@@ -10,8 +10,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'cd test\\code'
-                bat 'python unit_test_A.py'
+                bat 'python test\\code\\unit_test_A.py'
             }
         }
         stage('Clear') {
