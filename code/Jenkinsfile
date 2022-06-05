@@ -16,15 +16,14 @@ pipeline {
                         bat 'python test\\code\\unit_test_A.py 2> "logs\\unit_test_%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%_%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%%TIME:~9,2%.txt"'
                         bat 'bandit -r test\\code\\dodatak_A.py -f json -o "logs\\bandit_test_%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%_%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%%TIME:~9,2%.json"'
 
-                        bat 'rm -r \\logs'
                         bat 'xcopy \\test \\production'
                     } catch (Exception e) {
+                        echo 'BULD FAILED!'
+                        echo 'Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
+                        
                     }
-                    try {
-                    } catch (Exception e) {
-                        echo 'Exception occurred: ' + e.toString()
-                    } 
+
 
                 }
             }
