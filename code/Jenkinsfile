@@ -11,6 +11,9 @@ pipeline {
                         echo 'Exception occurred: ' + e.toString()
                         throw e
                     }
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "exit 1"
+                    }
                 }
             }
         }
@@ -23,6 +26,9 @@ pipeline {
                         echo 'SECURITY TEST FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
                         throw e
+                    }
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "exit 1"
                     }
                 }
             }
