@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Hello world!'
                 bat 'python --version'
-                bat 'rmdir test'
+                bat 'rmdir /s /q test'
                 bat 'mkdir test'
             }
         }
@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Clear') {
             steps {
-                bat 'rmdir test'
+                bat 'rmdir /s /q test'
 
 
             }
