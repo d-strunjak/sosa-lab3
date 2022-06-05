@@ -30,8 +30,6 @@ pipeline {
         stage('Clear') {
             steps {
                 bat 'rmdir /s /q test'
-
-
             }
         }
         
