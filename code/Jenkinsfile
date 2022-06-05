@@ -5,13 +5,16 @@ pipeline {
             steps {
                 echo 'Hello world!'
                 bat 'python --version'
+                bat 'mkdir test'
             }
         }
         stage('Clone') {
             steps {
+                bat 'cd test'
                 git url: 'https://github.com/d-strunjak/sosa-lab3.git'
-                bat 'dir'
                 bat 'git checkout main'
+                bat 'dir'
+
             }
         }
     }
