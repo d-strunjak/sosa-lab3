@@ -1,8 +1,6 @@
 pipeline {
     agent any
     stages {
-        def builFailed = false
-
         stage('Test') {
             steps {
                 script {
@@ -11,7 +9,7 @@ pipeline {
                     } catch (Exception e) {
                         echo 'TEST FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
-                        buildFailed = true
+                        throw e
                     }
                 }
             }
@@ -24,18 +22,14 @@ pipeline {
                     } catch (Exception e) {
                         echo 'SECURITY TEST FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
-                        buildFailed = true
-
+                        throw e
                     }
                 }
             }
         }
-
-        if(!buildFailed){
-            stage('Deliver') {
-                steps {
-                    bat 'xcopy /s /e /v /Q /Y test\\ production\\'
-                }
+        stage('Deliver') {
+            steps {
+                bat 'xcopy /s /e /v /Q /Y test\\ production\\'
             }
         }
         stage('Clear') {
