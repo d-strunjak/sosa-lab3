@@ -5,19 +5,27 @@ pipeline {
             steps {
                 echo 'Hello world!'
                 bat 'python --version'
-
+                bat 'mkdir logs'
             }
         }
         stage('Test') {
             steps {
                 script {
+                    bat 'set TIMESTAMP=%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%_%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%%TIME:~9,2%'
                     try {
                         bat 'python test\\code\\unit_test_A.py'
                     } catch (Exception e) {
                         echo 'Exception occurred: ' + e.toString()
+                        bat 'python test\\code\\unit_test_A.py > logs\\unit_test_%TIMESTSAMP%.txt'
+                    }
+                    try {
+                        bat 'bandit -r test\\code\\dodatak_A.py'
+                    } catch (Exception e) {
+                        echo 'Exception occurred: ' + e.toString()
+                        bat 'bandit -r test\\code\\dodatak_A.py- f json -o "logs\\bandit_test_%TIMESTAMP%.json"'
                     }
                 }
-                bat 'bandit -r test\\code\\dodatak_A.py'
+                }
             }
         }
         stage('Clear') {
