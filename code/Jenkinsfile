@@ -11,9 +11,16 @@ pipeline {
         stage('Test') {
             steps {
                 bat 'python test\\code\\unit_test_A.py'
+                bat 'bandit -r test\\code\\dodatak_A.py'
             }
         }
+        stage('Clear') {
+            steps {
+                bat 'rmdir /s /q test'
 
+
+            }
+        }
         
     }
 }
