@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                bat 'xcopy test production'
+                bat 'xcopy /s /q test production'
             }
         }
         stage('Clear') {
