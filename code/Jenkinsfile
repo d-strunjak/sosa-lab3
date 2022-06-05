@@ -9,7 +9,7 @@ pipeline {
                     } catch (Exception e) {
                         echo 'TEST FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
-                        // throw e
+                        throw e
                     }
                 }
             }
@@ -19,12 +19,10 @@ pipeline {
                 script {
                     try {
                         bat 'bandit -r test\\code\\dodatak_A.py -f json -o "logs\\bandit_test_%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%_%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%%TIME:~9,2%.json"'
-                        
                     } catch (Exception e) {
                         echo 'SECURITY TEST FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
-                        // throw e
-                        
+                        throw e
                     }
                 }
             }
