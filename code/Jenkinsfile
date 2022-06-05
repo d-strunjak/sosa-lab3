@@ -10,8 +10,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    bat 'set TIMESTAMP=%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%_%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%%TIME:~9,2%'
-                    echo 'TIMESTAMP'
+                    set 'TIMESTAMP=%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%_%TIME:~0,2%%TIME:~3,2%%TIME:~6,2%%TIME:~9,2%'
+                    echo '%TIMESTAMP%'
                     try {
                         bat 'python test\\code\\unit_test_A.py'
                     } catch (Exception e) {
