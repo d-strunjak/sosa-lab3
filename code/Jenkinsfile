@@ -5,27 +5,10 @@ pipeline {
             steps {
                 echo 'Hello world!'
                 bat 'python --version'
-                bat 'rmdir /s /q test'
-                bat 'mkdir test'
-            }
-        }
-        stage('Clone') {
-            steps {
-                bat 'cd test'
-                git url: 'https://github.com/d-strunjak/sosa-lab3.git'
-                bat "git branch -a"
-                bat 'git checkout main'
-                bat 'dir'
 
             }
         }
-        stage('Clear') {
-            steps {
-                bat 'rmdir /s /q test'
-
-
-            }
-        }
+       
         
     }
 }
