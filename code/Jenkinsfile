@@ -13,6 +13,7 @@ pipeline {
             steps {
                 bat 'cd test'
                 git url: 'https://github.com/d-strunjak/sosa-lab3.git'
+                bat "git branch -a"
                 bat 'git checkout main'
                 bat 'dir'
 
