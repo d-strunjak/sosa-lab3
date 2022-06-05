@@ -19,9 +19,9 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                bat 'del /q production'
+                // bat 'del /q production'
 
-                bat 'xcopy /s /q test production'
+                bat 'xcopy /s /e /v test production'
                 // bat 'robocopy test production /COPYALL /E'
             }
         }
