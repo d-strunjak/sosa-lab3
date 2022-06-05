@@ -11,6 +11,7 @@ pipeline {
                     } catch (Exception e) {
                         echo 'TEST FAILED! Check logs for more info'
                         echo 'Exception occurred: ' + e.toString()
+                        throw e
                         
                     }
                 }
@@ -18,7 +19,8 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                bat 'xcopy /s /q /f test production'
+                // bat 'xcopy /s /q test production'
+                bat 'robocopy test production /COPYALL /E'
             }
         }
         stage('Clear') {
