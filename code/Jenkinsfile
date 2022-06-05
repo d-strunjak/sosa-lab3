@@ -8,7 +8,19 @@ pipeline {
 
             }
         }
-       
+        stage('Test') {
+            steps {
+                bat 'cd test/code'
+                bat 'python unit_test_A.py'
+            }
+        }
+        stage('Clear') {
+            steps {
+                bat 'rmdir /s /q test'
+
+
+            }
+        }
         
     }
 }
