@@ -15,7 +15,7 @@ pipeline {
                         bat 'python test\\code\\unit_test_A.py'
                     } catch (Exception e) {
                         echo 'Exception occurred: ' + e.toString()
-                        bat 'python test\\code\\unit_test_A.py 2> logs\\unit_test_%TIMESTAMP%.txt'
+                        bat 'python test\\code\\unit_test_A.py 2> "logs\\unit_test_%TIMESTAMP%.txt"'
                     }
                     try {
                         bat 'bandit -r test\\code\\dodatak_A.py'
@@ -27,9 +27,7 @@ pipeline {
             }
         }
         stage('Clear') {
-            steps {
-                bat 'rmdir /s /q test'
-            }
+
         }
         
     }
